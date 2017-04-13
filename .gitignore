@@ -1,0 +1,14 @@
+# Created by .ignore support plugin (hsz.mobi)
+Будет удалено .gitignore
+Будет удалено .gradle/
+Будет удалено .idea/
+Будет удалено build.gradle
+Будет удалено build/
+Будет удалено gradle/
+Будет удалено gradlew
+Будет удалено gradlew.bat
+Будет удалено settings.gradle
+Будет удалено src/
+/.idea/
+/.gradle/
+/gradle/
