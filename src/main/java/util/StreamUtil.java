@@ -7,7 +7,7 @@ import java.util.Map;
 import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toList;
-import static java.util.stream.LongStream.*;
+import static java.util.stream.LongStream.rangeClosed;
 
 /**
  * Created by avetall  13.04.17.
@@ -34,7 +34,8 @@ public abstract class StreamUtil {
 
 
     private static List<Long> findDuplicates(List<Map<String, Long>> mapList){
-        return mapList.stream()
+        return mapList
+                .stream()
                 .collect(groupingBy(i->i.get(IDENTITY_FIELD), counting()))
                 .entrySet()
                 .stream()
@@ -43,8 +44,15 @@ public abstract class StreamUtil {
     }
 
     private static List<Long> findMissing(List<Map<String, Long>> mapList){
-        List<Long> idList = mapList.stream().mapToLong(value -> value.get(IDENTITY_FIELD)).sorted().boxed().collect(toList());
-        return rangeClosed(1, mapList.size()).filter(id->!idList.contains(id)).boxed().collect(toList());
+        return rangeClosed(1, mapList.size())
+                .filter(id->
+                        !mapList.stream()
+                                .mapToLong(value -> value.get(IDENTITY_FIELD))
+                                .sorted()
+                                .boxed()
+                                .collect(toList())
+                                .contains(id))
+                .boxed().collect(toList());
     }
 
 
