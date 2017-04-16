@@ -14,7 +14,7 @@ import static java.util.stream.LongStream.rangeClosed;
  */
 public abstract class StreamUtil {
 
-    private static final String IDENTITY_FIELD="ID";
+    private static final String IDENTIFIER_FIELD ="ID";
 
     public enum ActionType{
         findDuplicates,
@@ -36,7 +36,7 @@ public abstract class StreamUtil {
     private static List<Long> findDuplicates(List<Map<String, Long>> mapList){
         return mapList
                 .stream()
-                .collect(groupingBy(i->i.get(IDENTITY_FIELD), counting()))
+                .collect(groupingBy(i->i.get(IDENTIFIER_FIELD), counting()))
                 .entrySet()
                 .stream()
                 .filter(entry->entry.getValue()>1)
@@ -47,7 +47,7 @@ public abstract class StreamUtil {
         return rangeClosed(1, mapList.size())
                 .filter(id->
                         !mapList.stream()
-                                .mapToLong(value -> value.get(IDENTITY_FIELD))
+                                .mapToLong(value -> value.get(IDENTIFIER_FIELD))
                                 .sorted()
                                 .boxed()
                                 .collect(toList())
