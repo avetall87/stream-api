@@ -17,24 +17,21 @@ import static util.StreamUtil.ActionType.*;
 public class StreamUtilTest {
 
 
-    private List<Map<String,Long>> ints;
-    private Map<String,Long> emptyMap1;
-    private Map<String,Long> emptyMap2;
-    private Map<String,Long> emptyMap3;
+    private List<Map<String,Long>> result;
 
 
     @Before
     public void setUp() throws Exception {
-        ints = new ArrayList<>();
-        emptyMap1 = new HashMap<>();
+        result = new ArrayList<>();
+        Map<String, Long> emptyMap1 = new HashMap<>();
         emptyMap1.put("ID",1L);
-        emptyMap2 = new HashMap<>();
+        Map<String, Long> emptyMap2 = new HashMap<>();
         emptyMap2.put("ID",3L);
-        emptyMap3 = new HashMap<>();
+        Map<String, Long> emptyMap3 = new HashMap<>();
         emptyMap3.put("ID",1L);
-        ints.add(emptyMap1);
-        ints.add(emptyMap2);
-        ints.add(emptyMap3);
+        result.add(emptyMap1);
+        result.add(emptyMap2);
+        result.add(emptyMap3);
 
     }
 
@@ -42,16 +39,16 @@ public class StreamUtilTest {
     public void findDuplicatesPositive() throws Exception {
         assertNotNull(StreamUtil.find(null,findDuplicates));
         assertNotNull(StreamUtil.find(null,null));
-        assertNotNull(StreamUtil.find(ints,null));
-        assertEquals(1L, (long)StreamUtil.find(ints,findDuplicates).get(0));
+        assertNotNull(StreamUtil.find(result,null));
+        assertEquals(1L, (long)StreamUtil.find(result,findDuplicates).get(0));
     }
 
     @Test
     public void findMissingPositive() throws Exception {
         assertNotNull(StreamUtil.find(null,findMissing));
         assertNotNull(StreamUtil.find(null,null));
-        assertNotNull(StreamUtil.find(ints,null));
-        assertEquals(2L, (long)StreamUtil.find(ints,findMissing).get(0));
+        assertNotNull(StreamUtil.find(result,null));
+        assertEquals(2L, (long)StreamUtil.find(result,findMissing).get(0));
     }
 
 }
